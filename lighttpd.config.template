@@ -1,0 +1,11 @@
+server.document-root = "TODO: absolute path to the html directory"
+index-file.names = ( "index.html" )
+
+server.port = 3000
+
+mimetype.assign = (
+  ".html" => "text/html",
+  ".txt" => "text/plain",
+  ".jpg" => "image/jpeg",
+  ".png" => "image/png"
+)

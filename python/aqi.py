@@ -16,13 +16,14 @@ MODE_ACTIVE = 0
 MODE_QUERY = 1
 PERIOD_CONTINUOUS = 0
 
-JSON_FILE = '/var/www/html/aqi.json'
+JSON_FILE = './html/aqi.json'
 
 MQTT_HOST = ''
 MQTT_TOPIC = '/weather/particulatematter'
 
 ser = serial.Serial()
 ser.port = "/dev/ttyUSB0"
+
 ser.baudrate = 9600
 
 ser.open()
@@ -43,24 +44,24 @@ def construct_command(cmd, data=[]):
 
     if DEBUG:
         dump(ret, '> ')
-    return ret
+    return ret.encode()
 
 def process_data(d):
     r = struct.unpack('<HHxxBB', d[2:])
     pm25 = r[0]/10.0
     pm10 = r[1]/10.0
-    checksum = sum(ord(v) for v in d[2:8])%256
+    checksum = sum(v for v in d[2:8])%256
     return [pm25, pm10]
     #print("PM 2.5: {} μg/m^3  PM 10: {} μg/m^3 CRC={}".format(pm25, pm10, "OK" if (checksum==r[2] and r[3]==0xab) else "NOK"))
 
 def process_version(d):
     r = struct.unpack('<BBBHBB', d[3:])
-    checksum = sum(ord(v) for v in d[2:8])%256
+    checksum = sum(v for v in d[2:8])%256
     print("Y: {}, M: {}, D: {}, ID: {}, CRC={}".format(r[0], r[1], r[2], hex(r[3]), "OK" if (checksum==r[4] and r[5]==0xab) else "NOK"))
 
 def read_response():
     byte = 0
-    while byte != "\xaa":
+    while byte != b'\xaa':
         byte = ser.read(size=1)
 
     d = ser.read(size=9)
@@ -77,7 +78,7 @@ def cmd_query_data():
     ser.write(construct_command(CMD_QUERY_DATA))
     d = read_response()
     values = []
-    if d[1] == "\xc0":
+    if d[1] == ord(b'\xc0'):
         values = process_data(d)
     return values
 
@@ -142,7 +143,7 @@ if __name__ == "__main__":
 
         if MQTT_HOST != '':
             pub_mqtt(jsonrow)
-            
+
         print("Going to sleep for 1 min...")
         cmd_set_sleep(1)
         time.sleep(60)
