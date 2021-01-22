@@ -10,11 +10,27 @@ Ubuntu 20.04.1.
 
 ## how to install python3 libraries
 
-TODO:
+Required python3 libraries can be install using the following command:
+`sudo apt install git-core python3-serial`
+
+## how to enable starting aqi as a non-root user
+
+By default, `/dev/ttyUSB0` can'b be read by the non-root user. To enable reading
+it as my laptop user I had to add this user to the `dialout` group:
+`usermod -a -G dialout $USER`
+
+After that you should loggout and login to apply changes but as a work-around
+you can run the following code:
+```
+original_group="$(id -gn)"
+newgrp dialout
+newgrp $original_group
+```
 
 ## how to install lighttpd
 
-TODO:
+Run the:
+`sudo apt install lighttpd`
 
 ## how to run sensor
 
