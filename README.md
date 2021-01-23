@@ -1,21 +1,28 @@
 # aqi
 
-Fork of the [sensor project from the official joy-it documentation](https://github.com/zefanja/aqi).
+The fork of the [sensor project from the official joy-it documentation](https://github.com/zefanja/aqi).
 
-Original project was created to:
+The original sensor project was created to:
 > Measure AQI based on PM2.5 or PM10 with a Raspberry Pi and a SDS011 particle sensor
 
-This fork is created to enable usage of the python3 on my laptop running
-Ubuntu 20.04.1.
+This fork is created to enable running the sensor Python code on my laptop with
+Ubuntu 20.04.1 and Python3.
+
+Some changes were applied to the `aqi.py` file to enable usage of the Python3.
+Most of changes were connected to strings and bytes handling differences from
+the Python2.
+
+Additional changes and updates were made to simplify running the lighttpd
+server on the local laptop.
 
 ## how to install python3 libraries
 
 Required python3 libraries can be install using the following command:
-`sudo apt install git-core python3-serial`
+`sudo apt install python3-serial`
 
 ## how to enable starting aqi as a non-root user
 
-By default, `/dev/ttyUSB0` can'b be read by the non-root user. To enable reading
+By default, `/dev/ttyUSB0` can't be read by the non-root user. To enable reading
 it as my laptop user I had to add this user to the `dialout` group:
 `usermod -a -G dialout $USER`
 
