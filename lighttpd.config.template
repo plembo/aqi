@@ -5,6 +5,7 @@ server.port = 3000
 
 mimetype.assign = (
   ".html" => "text/html",
+  ".css" => "text/css",
   ".txt" => "text/plain",
   ".jpg" => "image/jpeg",
   ".png" => "image/png"
