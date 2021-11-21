@@ -15,8 +15,9 @@ CMD_WORKING_PERIOD = 8
 MODE_ACTIVE = 0
 MODE_QUERY = 1
 PERIOD_CONTINUOUS = 0
-
-JSON_FILE = './html/aqi.json'
+WEBROOT = '/var/www'
+# JSON_FILE = './html/aqi.json'
+JSON_FILE = '$WEBROOT/html/aqi.json'
 
 MQTT_HOST = ''
 MQTT_TOPIC = '/weather/particulatematter'
