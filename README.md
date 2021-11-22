@@ -1,4 +1,22 @@
 # aqi
+Forked from https://github.com/vvidovic/aqi, who has updated for python3 and
+simplify the frontend infrastructure (the lighttpd web server).
+
+I have made some minor changes in my own environment, including using the full path to the JSON file so the script can be run out of the pi user's home directory and expanding the heading to include "Air Quality Index" in parens.
+
+Adding the @reboot line to the pi user's crontab will as described below will launch the script automatically on reboot. As I am running this in a bin directory in the pi user's home, and the system is running the latest Rasberry Pi OS, the pi user's crontab looks like this:
+
+```
+@reboot /home/pi/bin/aqi.py
+```
+
+If you subsequently kill the process (found by logging in and doing a ```ps -u $USER```), it can be restarted again by running with the nohup and background commands so it won't terminate on logging out:
+
+```
+$ nohup api.py &
+```
+
+## Text of vvidovic's original README
 
 The fork of the [sensor project from the official joy-it documentation](https://github.com/zefanja/aqi).
 
