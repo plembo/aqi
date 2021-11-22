@@ -16,7 +16,7 @@ If you subsequently kill the process (found by logging in and doing a ```ps -u $
 $ nohup api.py &
 ```
 
-## Text of vvidovic's original README
+-------------------------------------------------------------------------------
 
 The fork of the [sensor project from the official joy-it documentation](https://github.com/zefanja/aqi).
 
