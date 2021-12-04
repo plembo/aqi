@@ -4,16 +4,17 @@ simplified the frontend infrastructure (the lighttpd web server).
 
 I have made some minor changes in my own environment, including using the full path to the JSON file so the script can be run out of the pi user's home directory and expanding the heading to include "Air Quality Index" in parens.
 
-Adding the @reboot line to the pi user's crontab will as described below will launch the script automatically on reboot. On latest Raspberry Pi OS  (where python3 is the default python), the pi user's crontab would look like this:
+Adding the @reboot line to the pi user's crontab will indeed launch the script automatically on reboot. On latest Raspberry Pi OS  (where python3 is the default python), the pi user's crontab would look like this:
 
 ```
 @reboot /home/pi/bin/aqi.py
 ```
-After some experimentation I found that @reboot wasn't the most reliable method to do this. Instead, I now prefer kicking things off in /etc/rc.local rather than cron. Position the following before the last line of rc.local (should be "exit 0"):
+After some experimentation I found that @reboot was less than completely reliable. Instead, I now kick things off in /etc/rc.local rather than cron. Position the following before the last line of rc.local (should be "exit 0"):
 
 ```
 su pi -c "nohup /home/pi/bin/aqi.py &"
 ```
+
 Using nohup and detaching the process (using "&" at the end of the command) will ensure it keeps running until you explicitly kill it.
 
 If you do subsequently kill the process (found by logging in and doing a ```ps -u $USER```), it can be restarted again by running with the nohup and background commands so it won't terminate on logging out:
