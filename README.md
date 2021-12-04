@@ -13,7 +13,7 @@ Adding the @reboot line to the pi user's crontab will as described below will la
 If you subsequently kill the process (found by logging in and doing a ```ps -u $USER```), it can be restarted again by running with the nohup and background commands so it won't terminate on logging out:
 
 ```
-$ nohup api.py &
+$ nohup aqi.py &
 ```
 
 PL
