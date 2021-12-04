@@ -15,7 +15,7 @@ After some experimentation I found that @reboot was less than completely reliabl
 su pi -c "nohup /home/pi/bin/aqi.py &"
 ```
 
-Using nohup and detaching the process (using "&" at the end of the command) will ensure it keeps running until you explicitly kill it (or reboot the system).
+Using nohup and backgrounding the process (using "&" at the end of the command) will ensure it keeps running until you explicitly kill it (or reboot the system).
 
 If you do subsequently kill the process (found by logging in and doing a ```ps -u $USER```), it can be restarted again by running with the nohup and background commands so it won't terminate on logging out:
 
